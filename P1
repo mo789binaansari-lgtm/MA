@@ -1,0 +1,47 @@
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("حجم بسته اینترنت را وارد کنید: ");
+        string volumeInput = Console.ReadLine();
+
+        Console.Write("موجودی کیف پول را وارد کنید: ");
+        string balanceInput = Console.ReadLine();
+
+        double volume, balance;
+
+        if (!double.TryParse(volumeInput, out volume) ||
+            !double.TryParse(balanceInput, out balance) ||
+            volume <= 0 || balance < 0)
+        {
+            Console.WriteLine("حجم بسته یا موجودی واردشده نامعتبر است.");
+        }
+        else
+        {
+            double price = volume * 5000;
+
+            if (volume > 10)
+            {
+                price = price * 0.85;
+            }
+
+            if (balance >= price)
+            {
+                double remaining = balance - price;
+
+                Console.WriteLine("خرید با موفقیت انجام شد.");
+                Console.WriteLine("موجودی باقی‌مانده: " + remaining + " تومان");
+            }
+            else
+            {
+                double shortage = price - balance;
+
+                Console.WriteLine("موجودی کاربر کافی نیست.");
+                Console.WriteLine("مبلغ کسری: " + shortage + " تومان");
+            }
+        }
+    }
+}
